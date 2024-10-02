@@ -45,7 +45,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" onclick="obtenerVista('Usuarios','getVistaFiltros','capaContenido');">Usuarios</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else Muertos</a></li>
+                            <li><a class="dropdown-item" href="#">Something else</a></li>
                         </ul>
                         </li>
                     </ul>

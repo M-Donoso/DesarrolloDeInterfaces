@@ -9,9 +9,11 @@ class C_Usuarios extends Controlador{
     require_once 'vistas/Vista.php';
     Vista::render('vistas/Usuarios/V_Usuarios_Filtros.php');
  }
+
+ public function getVistaListadoUsuarios($filtros=array()){
+   echo 'hola';
+ }
  
 }//fin clase Usuarios
-
-
 
 ?>
