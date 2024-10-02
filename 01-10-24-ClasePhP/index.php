@@ -13,7 +13,7 @@
                     <img src="icono/512x512.png" style="height: 5rem;">  <!-- rem es segun el tamaño de letra -->
                 </div>
                 <div class="col-md-8 d-none d-md-block divTitulo">
-                    Samuel Bermudo Garcia - DI 2024
+                    Marcos Donoso Casado - DI 2024
                 </div>
                 <div class="col-md-2 col-sm-3 d-none d-sm-block" >
                     Login
