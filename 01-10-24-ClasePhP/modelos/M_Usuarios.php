@@ -9,6 +9,30 @@ class M_Usuarios extends Modelo{
         $this->DAO = new DAO();
     }
 
+    public function buscarUsuarios($filtros=array()){
+        $ftexto='';
+        $factivo='';
+        extract($filtros);
+
+        $SQL="SELECT * FROM usuarios WHERE 1=1";
+
+        if($ftexto!=''){
+            $aPalabras=explode(' ', $ftexto);
+
+            $SQL.=" AND (nombre LIKE '%$ftexto%'
+            OR apellido_1 LIKE '%$ftexto%'
+            OR apellido_2 LIKE '%$ftexto%' )";
+        }
+
+        if($factivo!=''){
+            $SQL.=" AND activo = '$factivo' ";
+        }
+
+        $usuarios=$this->DAO->consultar($SQL);
+
+        return $usuarios;
+    }
+
 }
 
 ?>

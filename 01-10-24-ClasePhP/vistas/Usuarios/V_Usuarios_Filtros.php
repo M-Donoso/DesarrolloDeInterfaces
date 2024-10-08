@@ -8,7 +8,7 @@
         </div>
         <div class="form-group col-md-6 col-sm-12">
             <label for="factivo">Estado:</label>
-            <select type="text" id="factivo" name="ftexto" class="form-control">
+            <select type="text" id="factivo" name="factivo" class="form-control">
                 <option value="" selected>Todos</option>
                 <option value="S">Activos</option>
                 <option value="N">No Activos</option>
