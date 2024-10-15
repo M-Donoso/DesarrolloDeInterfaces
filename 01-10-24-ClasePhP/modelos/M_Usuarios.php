@@ -18,10 +18,24 @@ class M_Usuarios extends Modelo{
 
         if($ftexto!=''){
             $aPalabras=explode(' ', $ftexto);
+            $union = [];
 
-            $SQL.=" AND (nombre LIKE '%$ftexto%'
+            foreach($aPalabras as $palabra) {
+                $palabra = trim($palabra);
+                if ($palabra != '') {
+                    $union[] = "(nombre LIKE '%$palabra%'
+                    OR apellido_1 LIKE '%$palabra%'
+                    OR apellido_2 LIKE '%$palabra%' )";
+                }
+            }
+
+            if (!empty($union)) {
+                $SQL .= " AND (" . implode(' AND ', $union) . ")";
+            }
+
+            /* $SQL.=" AND (nombre LIKE '%$ftexto%'
             OR apellido_1 LIKE '%$ftexto%'
-            OR apellido_2 LIKE '%$ftexto%' )";
+            OR apellido_2 LIKE '%$ftexto%' )";*/
         }
 
         if($factivo!=''){
