@@ -41,12 +41,41 @@ class M_Usuarios extends Modelo{
         if($factivo!=''){
             $SQL.=" AND activo = '$factivo' ";
         }
+        $SQL.=' ORDER BY apellido_1, apellido_2, nombre, login';
 
         $usuarios=$this->DAO->consultar($SQL);
 
         return $usuarios;
     }
 
+
+    public function insertarUsuario($datos=array()){
+
+        $nombre='';
+        $apellido_1='';
+        $apellido_2='';
+        $sexo='';
+        $fecha_Alta=date('Y-m-d');
+        $mail='';
+        $login='Marcos';
+        $pass='1234';
+        $activo='S' ;
+        extract($datos);
+
+        $pass=MD5($pass); // Encriptacion de la contraseña
+
+        $SQL="INSERT INTO usuarios SET 
+            nombre='$nombre',
+            apellido_1='$apellido_1',
+            apellido_2='$apellido_2',
+            sexo='$sexo',
+            fecha_Alta='$fecha_Alta',
+            mail='$mail',
+            login='$login',
+            pass='$pass',
+            activo='$activo' ";
+        return $this->DAO->insertar($SQL);
+    }
 }
 
 ?>

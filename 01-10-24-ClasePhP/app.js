@@ -1,3 +1,9 @@
+function cargarUnScript(url) {
+    let script = document.createElement('script');
+    script.src = url;
+    document.head.appendChild(script);
+}
+
 function obtenerVista(controlador, metodo, destino){
     let opciones = {method: "GET",};
     let parametros = "controlador="+controlador+"&metodo="+metodo;
@@ -10,6 +16,7 @@ function obtenerVista(controlador, metodo, destino){
     })
     .then(vista=>{
         document.getElementById(destino).innerHTML=vista;
+        cargarUnScript('js/'+controlador+'.js')
     })
     .catch(err=>{
         console.err("Error al pedir vista", err.message);

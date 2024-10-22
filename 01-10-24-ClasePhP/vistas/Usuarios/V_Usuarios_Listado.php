@@ -18,14 +18,15 @@ $html.='<thead>
 $activo='';
 foreach($usuarios as $posicion=>$fila){
     //echo $fila['nombre'];
-
+$estilo='';
 if($fila['activo']=='N'){
 $activo='INACTIVO';
+$estilo='color:red;';
 }else{
     $activo='ACTIVO';
 }
     $html.='<tr>
-             <td nowrap>'.$fila['apellido_1'].' '.$fila['apellido_2'].$fila['nombre'].'</td>
+             <td nowrap style="'.$estilo.'">'.$fila['apellido_1'].' '.$fila['apellido_2'].', '.$fila['nombre'].'</td>
              <td>'.$fila['mail'].'</td>
              <td>'.$fila['login'].'</td>
              <td>'.$activo.'</td>
