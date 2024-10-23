@@ -30,6 +30,7 @@ $estilo='color:red;';
              <td>'.$fila['mail'].'</td>
              <td>'.$fila['login'].'</td>
              <td>'.$activo.'</td>
+             <td style="'. $estilo .'"><Button class="btn btn-outline-secondary" onclick="obtenerVista_EditarCrear(\'Usuarios\', \'getVistaNuevoEditar\', \'capaResultadosBusqueda\', '.$fila['id_Usuario'].')">Editar</Button></td>
             </tr>';
 
 }

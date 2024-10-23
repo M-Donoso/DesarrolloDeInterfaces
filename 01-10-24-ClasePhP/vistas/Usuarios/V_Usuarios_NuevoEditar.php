@@ -1,3 +1,6 @@
+<?php echo json_encode($datos);
+?>
+
 <h2>Nuevo Usuario</h2>
 <form id="formularioEdicion" name="formularioEdicion">
     <div class="row">

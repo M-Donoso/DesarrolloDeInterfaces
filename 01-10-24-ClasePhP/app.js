@@ -23,6 +23,24 @@ function obtenerVista(controlador, metodo, destino){
     })
 }
 
+function obtenerVista_EditarCrear(controlador, metodo, destino, id){
+    let opciones = {method: "GET",};
+    let parametros = "controlador="+controlador+"&metodo="+metodo+"&id="+id;
+    fetch("C_Frontal.php?"+parametros,opciones)
+    .then(res=>{
+        if(res.ok){
+            return res.text();
+        }
+        throw new Error(res.status);
+    })
+    .then(vista=>{
+        document.getElementById(destino).innerHTML=vista;
+    })
+    .catch(err=>{
+        console.err("Error al pedir vista", err.message);
+    })
+}
+
 function buscar(controlador, metodo, formulario, destino){
     let opciones = {method: "GET",};
     let parametros = "controlador="+controlador+"&metodo="+metodo;

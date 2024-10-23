@@ -15,7 +15,18 @@ class C_Usuarios extends Controlador{
     Vista::render('vistas/Usuarios/V_Usuarios_Filtros.php');
  }
  public function getVistaNuevoEditar($datos=array()){ //si ponemos = array estamos creando la variable (porque en php puede venir cualquier tipo de dato)) (esto significa q estamos esperando q nos venga un Array)
-   Vista::render('vistas/Usuarios/V_Usuarios_NuevoEditar.php');
+   if(!isset($datos['id']) || $datos['id']==''){
+      // nuevo
+      Vista::render('vistas/Usuarios/V_Usuarios_NuevoEditar.php');
+   }else{
+      //editando
+      $filtros['id_Usuario']=$datos['id'];
+      $usuarios=$this->modelo->buscarUsuarios($filtros);
+      Vista::render('vistas/Usuarios/V_Usuarios_NuevoEditar.php', array('usuario'=>$usuarios[0]));
+
+   }
+   
+
 }
  public function getVistaListadoUsuarios($filtros=array()){
    //var_dump($filtros);

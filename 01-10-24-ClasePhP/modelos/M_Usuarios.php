@@ -12,9 +12,14 @@ class M_Usuarios extends Modelo{
     public function buscarUsuarios($filtros=array()){
         $ftexto='';
         $factivo='';
+        $id_Usuario='';
         extract($filtros);
 
         $SQL="SELECT * FROM usuarios WHERE 1=1";
+
+        if($id_Usuario!=''){
+            $SQL.=" AND id_Usuario='$id_Usuario' ";
+        }
 
         if($ftexto!=''){
             $aPalabras=explode(' ', $ftexto);

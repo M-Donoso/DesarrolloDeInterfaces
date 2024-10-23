@@ -8,7 +8,7 @@ function guardarUsuario(){
     fetch("C_Frontal.php?"+parametros,opciones)
     .then(res=>{
         if(res.ok){
-            return res.text();
+            return res.text("GUARDADO");
         }
         throw new Error(res.status);
     })
