@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -16,7 +17,8 @@
                     Marcos Donoso Casado - DI 2024
                 </div>
                 <div class="col-md-2 col-sm-3 d-none d-sm-block" >
-                    Login
+                    <a href="login.php" class="btn btn-primary">Login</a>
+                    <?php echo $_SESSION['login'];?>
                 </div>
             </div>
         </div>   
