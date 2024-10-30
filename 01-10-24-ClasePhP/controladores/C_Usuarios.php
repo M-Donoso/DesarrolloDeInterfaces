@@ -11,6 +11,12 @@ class C_Usuarios extends Controlador{
     $this->modelo = new M_Usuarios();
  }
 
+ public function validarUsuario($datos=array()){
+   $id_Usuario=$this->modelo->login($datos);
+   return $id_Usuario;
+
+ }
+
  public function getVistaFiltros($datos=array()){ //si ponemos = array estamos creando la variable (porque en php puede venir cualquier tipo de dato)) (esto significa q estamos esperando q nos venga un Array)
     Vista::render('vistas/Usuarios/V_Usuarios_Filtros.php');
  }

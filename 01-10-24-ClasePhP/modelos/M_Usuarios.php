@@ -9,6 +9,29 @@ class M_Usuarios extends Modelo{
         $this->DAO = new DAO();
     }
 
+    public function login($datos){
+        $usuario='fsads';
+        $password='ksokdpd';
+        extract($datos);
+        $usuario=addslashes($usuario);
+
+        $SQL="SELECT * FROM usuarios WHERE login='$usuario' && pass=MD5('$password') " ;
+        echo $SQL;
+        $usuarios=$this->DAO->consultar($SQL);
+        $id_Usuario='';
+        if(empty($usuarios)){ 
+            // No encontrado
+
+        }else{ // Encontrado
+            $_SESSION['login']=$usuario;
+            $_SESSION['usuario']=$usuarios[0]['nombre'];
+            $_SESSION['id_Usuario']=$usuarios[0]['id_Usuario'];
+            $id_Usuario=$usuarios[0]['id_Usuario'];
+        }
+        return $id_Usuario;
+
+    }
+
     public function buscarUsuarios($filtros=array()){
         $ftexto='';
         $factivo='';
