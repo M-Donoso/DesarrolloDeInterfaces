@@ -30,7 +30,7 @@ USE `di24`;
 --
 
 CREATE TABLE `usuarios` (
-  `id_Usuario` int(11) UNSIGNED NOT NULL,
+  `id_Usuario` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `nombre` varchar(40) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `apellido_1` varchar(40) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `apellido_2` varchar(40) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
@@ -38,10 +38,77 @@ CREATE TABLE `usuarios` (
   `fecha_Alta` date DEFAULT NULL,
   `mail` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL DEFAULT '',
   `movil` varchar(15) NOT NULL DEFAULT '',
-  `login` varchar(40) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `login` varchar(40) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL UNIQUE,
   `pass` varchar(32) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `activo` char(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+
+CREATE TABLE `menu` (
+  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT '#',
+  `id_padre` int(11) UNSIGNED DEFAULT NULL,
+  `posicion` int(11) UNSIGNED NOT NULL,
+  `activo` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
+
+CREATE TABLE `roles` (
+  `idRol` int(11) UNSIGNED NOT NULL PRIMARY KEY,
+  `nombreRol` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+CREATE TABLE `rolesusuarios` (
+  `idRol` int(11) UNSIGNED NOT NULL,  
+  `idUsuario` int(11) UNSIGNED NOT NULL, 
+  FOREIGN KEY (`idRol`) REFERENCES roles(`idRol`),
+  FOREIGN KEY (`idUsuario`) REFERENCES usuarios(`id_Usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
+-- Tabla permisos
+CREATE TABLE `permisos` (
+  `idMenu` int(11) UNSIGNED NOT NULL,  -- Cambiado a `UNSIGNED`
+  `idPermiso` int(11) UNSIGNED NOT NULL PRIMARY KEY,
+  `nombrePermiso` varchar(60) NOT NULL,
+  FOREIGN KEY (`idMenu`) REFERENCES menu(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
+-- Tabla permisosusuarios
+CREATE TABLE `permisosusuarios` (
+  `idPermiso` int(11) UNSIGNED NOT NULL,  -- Cambiado a UNSIGNED
+  `idUsuario` int(11) UNSIGNED NOT NULL,  -- Mantiene UNSIGNED
+  FOREIGN KEY (`idPermiso`) REFERENCES permisos(`idPermiso`),
+  FOREIGN KEY (`idUsuario`) REFERENCES usuarios(`id_Usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
+
+CREATE TABLE `rolespermisos` (
+  `idRol` int(11) UNSIGNED NOT NULL,
+  `idPermiso` int(11) UNSIGNED NOT NULL,
+  FOREIGN KEY (`idRol`) REFERENCES roles(`idRol`),
+  FOREIGN KEY (`idPermiso`) REFERENCES permisos(`idPermiso`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `menu`
+--
+
+INSERT INTO `menu` (`id`, `titulo`, `url`, `id_padre`, `posicion`, `activo`) VALUES
+(1, 'Home', '/home', NULL, 1, 1),
+(2, 'Features', '/features', NULL, 2, 1),
+(3, 'Pricing', '/pricing', NULL, 3, 1),
+(4, 'Dropdown link', '#', NULL, 4, 1),
+(5, 'Usuarios', 'obtenerVista(\'Usuarios\',\'getVistaFiltros\',\'capaContenido\');', 4, 1, 1),
+(6, 'Another action', '/another-action', 4, 2, 1),
+(7, 'Something else here', '/something-else', 4, 3, 1),
+(8, 'Editar Menu', 'obtenerVista(\"Menu\", \"getVistaFiltros\", \"capaContenido\")', NULL, 5, 1);
+
+
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -182,27 +249,7 @@ INSERT INTO `usuarios` (`id_Usuario`, `nombre`, `apellido_1`, `apellido_2`, `sex
 (506, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyyz', '0c0b3da4ac402bd86191d959be081114', 'S'),
 (516, 'xxxx', 'xxxx', 'xxxx', 'H', '2023-11-09', 'xxxxxxxx@2si2024', '', 'xxxxxyyzdd', '0c0b3da4ac402bd86191d959be081114', 'S');
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_Usuario`),
-  ADD UNIQUE KEY `login` (`login`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_Usuario` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=517;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

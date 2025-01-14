@@ -1,4 +1,4 @@
-<h2>Mttt. de Usuarios</h2>
+<h2>Mtt. de Usuarios</h2>
 <div class="container-fluid" id="capaFiltrosBusqueda">
     <form id="formularioBuscar" name="formularioBuscar">
     <div class="row">
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-lg-12">
             <button type="button" class="btn btn-outline-primary" onclick="buscar('Usuarios', 'getVistaListadoUsuarios', 'formularioBuscar', 'capaResultadosBusqueda')">Buscar</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="obtenerVista_EditarCrear('Usuarios', 'getVistaNuevoEditar', 'capaEditarCrear','')">Nuevo Usuario</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="obtenerVista_EditarCrear('Usuarios', 'getVistaNuevoEditar', 'capaResultadosBusqueda','')">Nuevo Usuario</button>
         
         </div>
     </div>

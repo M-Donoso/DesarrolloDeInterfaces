@@ -1,4 +1,5 @@
 <?php echo json_encode($datos);
+$id_Usuario='';
 $nombre='';
 $apellido_1='';
 $apellido_2='';
@@ -18,12 +19,13 @@ $cinactivo = $activo=='N' ? ' checked ': '';
 
 
 ?>
-<h2>Nuevo Usuario</h2>
+<h2>Nuevo/Editar Usuario</h2>
 <form id="formularioEdicion" name="formularioEdicion">
     <div class="row">
         <div class="form-group col-md-3 col-sm-12">
+            <input type="hidden" id="id_Usuario" name="id_Usuario" value="<?php echo $id_Usuario?>">
             <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Introduce tu Nombre" value="<?php echo $nombre; ?>"/>
+            <input required type="text" id="nombre" name="nombre" class="form-control" placeholder="Introduce tu Nombre" value="<?php echo $nombre; ?>"/>
         </div>
 
         <div class="form-group col-md-3 col-sm-12">
@@ -72,8 +74,8 @@ $cinactivo = $activo=='N' ? ' checked ': '';
     <div class="row">
         <div class="col-lg-12">
             <button type="button" class="btn btn-primary" onclick="guardarUsuario();">Guardar</button>
-            <button type="button" class="btn btn-secondary" onclick="document.getElementById('capaEditarCrear').innerHTML = '';">Cancelar</button>
-            <span id="msjError" name="msjError" style="color:blue;"></span>
+            <button type="button" class="btn btn-secondary" onclick="buscar('Usuarios', 'getVistaListadoUsuarios', 'formularioBuscar', 'capaResultadosBusqueda')">Cancelar</button>
+            <span id="msjError" name="msjError" style="color:blue"></span>
         </div>
     </div>
     </form>

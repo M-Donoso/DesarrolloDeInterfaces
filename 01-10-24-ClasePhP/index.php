@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php session_start(); 
+$nombre='';
+if(isset($_SESSION['login']) ){
+    $nombre = $_SESSION['login'];
+}
+
+$Btnlogin = '<a href="login.php" class="btn btn-primary">Login</a>';
+$Btnlogout = '<a href="logout.php" class="btn btn-danger">Logout</a>';
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -17,12 +25,18 @@
                     Marcos Donoso Casado - DI 2024
                 </div>
                 <div class="col-md-2 col-sm-3 d-none d-sm-block" >
-                    <a href="login.php" class="btn btn-primary">Login</a>
-                    <?php echo $_SESSION['login'];?>
+                    <?php 
+                    if($nombre != ''){
+                        echo $Btnlogout;
+                    }else{
+                        echo $Btnlogin;
+                    }
+                    echo $nombre?>
                 </div>
             </div>
         </div>   
-        <div class="container-fluid" id="capaMenu">
+        <!-- Menu HTML !-->
+        <!-- <div class="container-fluid" id="capaMenu">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">Navbar</a>
@@ -54,14 +68,17 @@
                     </div>
                 </div>
             </nav>
-        </div>
-        
-        <div class="container-fluid" id="capaContenido">
+        </div> -->
 
-        </div>
+        <!-- Menu PHP !-->
 
+        <?php
+        require_once 'controladores/C_Menu.php';
+        $menuController = new C_Menu();
+        $menuController->cargarVistaMenu();
+        ?>
 
-
+        <div class="container-fluid" id="capaContenido"></div>
 
         <script src="app.js" async></script>
     </body>

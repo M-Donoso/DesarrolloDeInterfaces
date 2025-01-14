@@ -7,7 +7,6 @@
         if(file_exists('./controladores/'.$controlador.'.php')){
             //Existe el controlador
             $metodo=$getPost['metodo'];
-            $metodo=$getPost['metodo'];
             
     require_once 'controladores/'.$controlador.'.php';
 
@@ -25,5 +24,4 @@
      //no he recibido nada
         echo 'Error CF-01';
     }
-
 ?>

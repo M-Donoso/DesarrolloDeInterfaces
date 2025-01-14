@@ -1,0 +1,53 @@
+/* Estilos para la tabla */
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Estilo para la fila cuando está inactiva */
+.table tr.inactivo {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Estilo para la fila activa */
+.table tr.activo {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Botón de lápiz */
+.btn-outline-secondary {
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+}
+
+/* Estilo para el toggle switch */
+.form-check-input {
+    width: 40px;
+    height: 20px;
+}
+
+.form-check-label {
+    margin-left: 5px;
+}
+
+/* Estilo del hover sobre las filas de la tabla */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Mejorar la visibilidad de la columna de "Editar usuarios" */
+th:first-child, td:first-child {
+    width: 80px;
+}
+
+/* Estilo de la columna "Acciones" */
+th:last-child, td:last-child {
+    width: 120px;
+}

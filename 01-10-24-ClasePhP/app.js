@@ -59,4 +59,3 @@ function buscar(controlador, metodo, formulario, destino){
         console.err("Error al pedir vista", err.message);
     })
 }
-

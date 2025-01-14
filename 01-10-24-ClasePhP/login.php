@@ -11,9 +11,6 @@ if($usuario== '' || $password== ''){
     require_once 'controladores/C_Usuarios.php';
     $objCont = new C_Usuarios();
     $id_Usuario=$objCont->validarUsuario(array('usuario'=>$usuario, 'password'=>$password));
-
-
-
     if($id_Usuario!=''){
 
         header('Location: index.php'); //saltar a esta pagina (no puede haber pintado nada antes)

@@ -4,6 +4,7 @@ require_once 'modelos/DAO.php';
 class M_Usuarios extends Modelo{
     public $DAO;
 
+
     public function __construct(){
         parent::__construct(); //ejecutar constructor padre
         $this->DAO = new DAO();
@@ -16,7 +17,6 @@ class M_Usuarios extends Modelo{
         $usuario=addslashes($usuario);
 
         $SQL="SELECT * FROM usuarios WHERE login='$usuario' && pass=MD5('$password') " ;
-        echo $SQL;
         $usuarios=$this->DAO->consultar($SQL);
         $id_Usuario='';
         if(empty($usuarios)){ 
@@ -104,6 +104,52 @@ class M_Usuarios extends Modelo{
             activo='$activo' ";
         return $this->DAO->insertar($SQL);
     }
-}
 
+    public function validarLogin($login, $id_Usuario){
+        $SQL = "SELECT COUNT(*) as count FROM usuarios WHERE login = '$login' AND id_usuario != '$id_Usuario'";
+        $resultado = $this->DAO->consultar($SQL);
+        return $resultado[0]['count'] > 0; // Retorna verdadero si el login existe
+    }
+
+    public function updateUsuario($datos=array()){
+
+            $nombre='';
+            $apellido_1='';
+            $apellido_2='';
+            $sexo='';
+            $fecha_Alta='';
+            $mail='';
+            $login='';
+            $pass='';
+            $activo='' ;
+            extract($datos);
+    
+            if (!empty($pass)) {
+                $pass=MD5($pass); // Encriptación de la contraseña
+                $passSQL = ", pass='$pass'";
+            } else {
+                $passSQL = '';
+            }
+    
+            $SQL="UPDATE usuarios SET 
+                nombre='$nombre',
+                apellido_1='$apellido_1',
+                apellido_2='$apellido_2',
+                sexo='$sexo',
+                fecha_Alta='$fecha_Alta',
+                mail='$mail',
+                login='$login',
+                activo='$activo'
+                $passSQL
+                WHERE id_Usuario='$id_Usuario'";
+            
+            return $this->DAO->actualizar($SQL);
+        }
+
+        public function actualizarEstado($idUsuario, $activo) {
+            $query = "UPDATE usuarios SET activo = '$activo' WHERE id_Usuario = '$idUsuario'";
+            return $this->DAO->actualizar($query);
+        }
+    
+}
 ?>
